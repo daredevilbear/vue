@@ -39,9 +39,9 @@ Resources:
   AmplifyApp:
     Type: "AWS::Amplify::App"
     Properties:
-      Name: StoutJeremyApp
+      Name: StoutApp
       Repository: !Ref Repository
-      Description: Stout Jeremy app
+      Description: StoutApp
       OauthToken: !Ref OauthToken
       BuildSpec: |-
         version: 0.1
@@ -66,15 +66,15 @@ Resources:
   AmplifyBranch:
     Type: AWS::Amplify::Branch
     Properties:
-      BranchName: dev
+      BranchName: master
       AppId: !GetAtt AmplifyApp.AppId
-      Description: dev Branch
+      Description: Master Branch
       EnableAutoBuild: true
       Tags:
         - Key: Name
           Value: todo-master
         - Key: Branch
-          Value: dev
+          Value: master
 
   AmplifyDomain:
     Type: AWS::Amplify::Domain
@@ -82,7 +82,7 @@ Resources:
       DomainName: !Ref Domain
       AppId: !GetAtt AmplifyApp.AppId
       SubDomainSettings:
-        - Prefix: dev
+        - Prefix: master
           BranchName: !GetAtt AmplifyBranch.BranchName
 
 Outputs:
